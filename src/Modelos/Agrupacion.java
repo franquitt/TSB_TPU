@@ -35,7 +35,7 @@ public class Agrupacion
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer();
-        sb.append("nombre: '").append(nombre).append('\'');
+        sb.append("Nombre: '").append(nombre).append('\'');
         sb.append(", votos: ").append(votos);
         return sb.toString();
     }

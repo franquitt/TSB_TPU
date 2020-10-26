@@ -18,9 +18,7 @@ public class Archivo
     @Override
     public String toString()
     {
-        return "TextFile{" +
-                "path='" + path + '\'' +
-                '}';
+        return "Archivo{" + path + '}';
     }
 
     public TSB_OAHashtable Agrupaciones()

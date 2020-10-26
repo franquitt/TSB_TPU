@@ -501,7 +501,8 @@ public class TSB_OAHashtable<K,V> implements Map<K,V>, Cloneable, Serializable
         StringBuilder cad = new StringBuilder("");
         for(int i = 0; i < this.table.length; i++)
         {
-            cad.append("\nLista ").append(i).append(":\n\t").append(this.table[i].toString());   
+            for(int j=0;j<this.table[i].size();j++)
+                cad.append("\n\t").append(this.table[i].get(j).toString());
         }
         return cad.toString();
     }
@@ -739,7 +740,7 @@ public class TSB_OAHashtable<K,V> implements Map<K,V>, Cloneable, Serializable
         @Override
         public String toString()
         {
-            return "(" + key.toString() + ", " + value.toString() + ")";
+            return value.toString();
         }
     }
     

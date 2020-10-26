@@ -45,7 +45,7 @@ public class Region
         return subregiones.values();
     }
 
-    public Region getSubregion(String coidgo)
+    public Region getSubregion(String codigo)
     {
         return (Region) subregiones.get(codigo);
     }
@@ -68,8 +68,7 @@ public class Region
 
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer(codigo+" - " + nombre);
-        return sb.toString();
+        return nombre.equals("") ? codigo : codigo+" - " + nombre;
     }
 
 }

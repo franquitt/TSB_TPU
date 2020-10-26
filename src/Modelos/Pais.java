@@ -15,10 +15,10 @@ public class Pais
     {
         region = new TSB_OAHashtable();
         region.put("00",new Region("00","Argentina"));
-        identificarRegiones(carpeta);
+        calcRegiones(carpeta);
     }
 
-    public void identificarRegiones(String path)
+    public void calcRegiones(String path)
     {
         String linea[], codigo, nombre, distrito, seccion;
         Scanner scanner;

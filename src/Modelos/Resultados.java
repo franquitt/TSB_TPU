@@ -1,27 +1,28 @@
 package Modelos;
 
 import Soporte.TSB_OAHashtable;
+
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Iterator;
 import java.util.Scanner;
 
-public class Resultados
-{
+public class Resultados {
 
     private Postulaciones agrupaciones;
     private TSB_OAHashtable resultados;
     private TSB_OAHashtable mesas;
+    private Pais pais;
 
-    public Resultados(Postulaciones agrupaciones, String carpeta)
-    {
+    public Resultados(Pais pais, Postulaciones agrupaciones, String carpeta) {
         this.agrupaciones = agrupaciones;
+        this.pais = pais;
         resultados = new TSB_OAHashtable();
-        resultados.put("00",agrupaciones.llenarAgrupaciones());
+        resultados.put("00", agrupaciones.llenarAgrupaciones());
         sumarPorAgrupacion(carpeta);
     }
 
-    public void sumarPorAgrupacion(String path)
-    {
+    public void sumarPorAgrupacion(String path) {
         mesas = new TSB_OAHashtable();
         TSB_OAHashtable res;
         String linea[], categoria, codAgrupacion, codMesa, nomMesa;
@@ -30,19 +31,24 @@ public class Resultados
         try {
             scanner = new Scanner(new File(path + "\\mesas_totales_agrp_politica.dsv"));
             int index = 0;
+            Region circuito = null;
             while (scanner.hasNextLine()) {
                 linea = scanner.nextLine().split("\\|");
                 categoria = linea[4];
-                if (categoria.compareTo("000100000000000") == 0)
-                {
+                if (categoria.compareTo("000100000000000") == 0) {
 
                     codMesa = linea[3];
                     codAgrupacion = linea[5];
-//                    if (mesas.get(codMesa) == null)
-//                    {
-//                        mesas.put(codMesa, "Mesa " + index);
-//                        index++;
-//                    }
+                    if (circuito == null || !circuito.getNombre().equals(linea[2])) {
+                        Iterator<Region> iterador = (pais.getDistritos()).iterator();
+                        while (iterador.hasNext()) {
+                            Region distrito = iterador.next();
+                            if (distrito.getCodigo().equals(linea[0])) {
+                                circuito = distrito.getSubregion(linea[1]).getSubregion(linea[2]);
+                                break;
+                            }
+                        }
+                    }
 
                     votos = Integer.parseInt(linea[6]);
                     res = (TSB_OAHashtable) resultados.get("00");
@@ -52,6 +58,9 @@ public class Resultados
                     ((Agrupacion) cargarResultados(linea[1]).get(codAgrupacion)).sumar(votos);
                     ((Agrupacion) cargarResultados(linea[2]).get(codAgrupacion)).sumar(votos);
                     ((Agrupacion) cargarResultados(linea[3]).get(codAgrupacion)).sumar(votos);
+
+                    circuito.cargarRegion(linea[3]);
+
 
                 }
             }
@@ -63,19 +72,16 @@ public class Resultados
     }
 
 
-    public String getResultados(String codRegion)
-    {
-        return ((TSB_OAHashtable)resultados.get(codRegion)).toString();
+    public String getResultados(String codRegion) {
+        return ((TSB_OAHashtable) resultados.get(codRegion)).toString();
     }
 
-    public TSB_OAHashtable cargarResultados(String codRegion)
-    {
+    public TSB_OAHashtable cargarResultados(String codRegion) {
         TSB_OAHashtable table = (TSB_OAHashtable) resultados.get(codRegion);
-        if(table != null)
+        if (table != null)
             return table;
-        else
-        {
-            resultados.put(codRegion,agrupaciones.llenarAgrupaciones());
+        else {
+            resultados.put(codRegion, agrupaciones.llenarAgrupaciones());
             return (TSB_OAHashtable) resultados.get(codRegion);
         }
     }

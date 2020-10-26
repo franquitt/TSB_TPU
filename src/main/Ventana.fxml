@@ -21,7 +21,7 @@
       <TextArea fx:id="txtResultados" editable="false" layoutX="31.0" layoutY="259.0" opacity="0.66" prefHeight="313.0" prefWidth="686.0" AnchorPane.bottomAnchor="51.0" AnchorPane.leftAnchor="31.0" AnchorPane.rightAnchor="31.0" AnchorPane.topAnchor="259.0" />
       <ComboBox fx:id="cmbMesas" layoutX="133.0" layoutY="178.0" onAction="#votosMesa" prefHeight="25.0" prefWidth="252.0" />
       <Label fx:id="lblMesas" layoutX="55.0" layoutY="182.0" text="Mesas" />
-      <Button fx:id="btnGuardar" layoutX="297.0" layoutY="220.0" mnemonicParsing="false" onAction="#Guardar" prefHeight="25.0" prefWidth="88.0" text="Guardar" />
+      <Button fx:id="btnGuardar" layoutX="297.0" layoutY="220.0" mnemonicParsing="false" onAction="#Guardar" prefHeight="25.0" prefWidth="88.0" text="Exportar" />
       <ImageView fitHeight="202.0" fitWidth="270.0" layoutX="487.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../resources/f0026718.jpg" />

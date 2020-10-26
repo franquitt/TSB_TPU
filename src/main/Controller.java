@@ -64,17 +64,17 @@ public class Controller
 
             if(btnCargar.getText().equals("Limpiar Filtros"))
             {
-                showResultadosRegion("00");
+                showResultadosCombinacion("00");
                 btnCargar.setText("Cargar");
             }
 
             else {
                 Postulaciones lista = new Postulaciones(carpeta);
                 pais = new Pais(carpeta);
-                res = new Resultados(lista, carpeta);
+                res = new Resultados(pais, lista, carpeta);
 
                 btnCargar.setText("Limpiar Filtros");
-                showResultadosRegion("00");
+                showResultadosCombinacion("00");
             }
             cmbDistritos.setItems(FXCollections.observableArrayList(pais.getDistritos()));
 
@@ -84,7 +84,7 @@ public class Controller
         }
     }
 
-    private void showResultadosRegion(String codRegion)
+    private void showResultadosCombinacion(String codRegion)
     {
         res.getResultados(codRegion);
         txtResultados.setText("Resultados de " + nombre + ": \n" + res.getResultados(codRegion));
@@ -93,8 +93,9 @@ public class Controller
     public void votosDistrito(ActionEvent event)
     {
         try
-        {   Region distrito = (Region) cmbDistritos.getValue();
-            nombre += ", " + distrito.getNombre();
+        {
+            Region distrito = (Region) cmbDistritos.getValue();
+            nombre = "Argentina " + distrito.getNombre();
 
             cmbSecciones.getItems().clear();
             cmbCircuitos.getItems().clear();
@@ -102,7 +103,7 @@ public class Controller
 
             ObservableList ol = FXCollections.observableArrayList(distrito.getSubregiones());
             cmbSecciones.setItems(ol);
-            showResultadosRegion(distrito.getCodigo());
+            showResultadosCombinacion(distrito.getCodigo());
 
         }catch (Exception e)
         {
@@ -115,15 +116,16 @@ public class Controller
     {
         try
         {
+            Region distrito = (Region) cmbDistritos.getValue();
             Region seccion = (Region) cmbSecciones.getValue();
-            nombre += ", " + seccion.getNombre();
+            nombre = "Argentina " + distrito.getNombre() + ", " + seccion.getNombre();
 
             cmbCircuitos.getItems().clear();
             cmbMesas.getItems().clear();
 
             ObservableList ol = FXCollections.observableArrayList(seccion.getSubregiones());
             cmbCircuitos.setItems(ol);
-            showResultadosRegion(seccion.getCodigo());
+            showResultadosCombinacion(seccion.getCodigo());
 
         }catch (Exception e)
         {
@@ -135,14 +137,15 @@ public class Controller
     public void votosCircuito(ActionEvent event)
     {
         try {
-
+            Region distrito = (Region) cmbDistritos.getValue();
+            Region seccion = (Region) cmbSecciones.getValue();
             Region circuito = (Region) cmbCircuitos.getValue();
-            nombre += ", " + circuito.getNombre();
+            nombre = "Argentina " + distrito.getNombre() + ", " + seccion.getNombre() + ", " + circuito.getNombre();
 
             cmbMesas.getItems().clear();
-//                ObservableList ol = FXCollections.observableArrayList(circuito.);
-//                cmbMesas.setItems(ol);
-            showResultadosRegion(circuito.getCodigo());
+            ObservableList ol = FXCollections.observableArrayList(circuito.getSubregiones());
+            cmbMesas.setItems(ol);
+            showResultadosCombinacion(circuito.getCodigo());
 
         }catch (Exception e)
         {
@@ -152,9 +155,13 @@ public class Controller
     public void votosMesa(ActionEvent event)
     {
         try {
-            nombre += ", " + ((Map.Entry) cmbMesas.getValue()).getValue() ;
-            String mesa = (String) ((Map.Entry) cmbMesas.getValue()).getKey();
-            showResultadosRegion(codigo + mesa);
+            Region distrito = (Region) cmbDistritos.getValue();
+            Region seccion = (Region) cmbSecciones.getValue();
+            Region circuito = (Region) cmbCircuitos.getValue();
+            Region mesa = (Region) cmbMesas.getValue();
+            nombre = "Argentina " + distrito.getNombre() + ", " + seccion.getNombre() + ", " + circuito.getNombre() + ", " + mesa.getCodigo();
+
+            showResultadosCombinacion(mesa.getCodigo());
         }catch (Exception e)
         {
 
@@ -181,10 +188,10 @@ public class Controller
         {
             Grabar gb = new Grabar(carpeta + "\\" + nombre);
             gb.write(txtResultados.getText());
-            JOptionPane.showMessageDialog(null, "Archivo Guardodo Exitosamente...!!!","Grabacion", JOptionPane.PLAIN_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Archivo guardado Exitosamente","Exportar", JOptionPane.PLAIN_MESSAGE);
         }catch (Exception e )
         {
-            JOptionPane.showMessageDialog(null, "Error al intentar guardar","Grabacion", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error al intentar guardar","Exportar", JOptionPane.ERROR_MESSAGE);
         }
     }
 
