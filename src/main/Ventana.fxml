@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="apBase" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="623.0" prefWidth="748.0" style="-fx-background-image: url('/fondo1.jpg');" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.Controller">
+   <children>
+      <ComboBox fx:id="cmbDistritos" layoutX="133.0" layoutY="60.0" onAction="#votosDistrito" prefHeight="25.0" prefWidth="252.0" />
+      <Label fx:id="lblDistritos" layoutX="53.0" layoutY="64.0" text="Distritos" />
+      <ComboBox fx:id="cmbSecciones" layoutX="133.0" layoutY="100.0" onAction="#votosSeccion" prefHeight="25.0" prefWidth="252.0" />
+      <Label fx:id="lblSecciones" layoutX="53.0" layoutY="104.0" text="Secciones" />
+      <ComboBox fx:id="cmbCircuitos" layoutX="133.0" layoutY="138.0" onAction="#votosCircuito" prefHeight="25.0" prefWidth="252.0" />
+      <Label fx:id="lblCircuitos" layoutX="55.0" layoutY="142.0" text="Circuitos" />
+      <Button fx:id="btnBuscarArchivo" layoutX="31.0" layoutY="18.0" mnemonicParsing="false" onAction="#btnBuscarArchivo" prefHeight="25.0" prefWidth="88.0" text="Abrir" />
+      <Button fx:id="btnSalir" layoutX="617.0" layoutY="584.0" mnemonicParsing="false" onAction="#btnSalir" prefHeight="25.0" prefWidth="99.0" text="Salir" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="32.0" />
+      <Label fx:id="lblDireccion" layoutX="133.0" layoutY="22.0" text="Buscar carpeta de Destino" />
+      <Button fx:id="btnLimpiar" layoutX="163.0" layoutY="220.0" mnemonicParsing="false" onAction="#btnLimpiar" prefHeight="25.0" prefWidth="88.0" text="Limpiar" />
+      <Button fx:id="btnCargar" layoutX="31.0" layoutY="220.0" mnemonicParsing="false" onAction="#btnCargar" prefHeight="25.0" prefWidth="88.0" text="Cargar" />
+
+      <TextArea fx:id="txtResultados" editable="false" layoutX="31.0" layoutY="259.0" opacity="0.66" prefHeight="313.0" prefWidth="686.0" AnchorPane.bottomAnchor="51.0" AnchorPane.leftAnchor="31.0" AnchorPane.rightAnchor="31.0" AnchorPane.topAnchor="259.0" />
+      <ComboBox fx:id="cmbMesas" layoutX="133.0" layoutY="178.0" onAction="#votosMesa" prefHeight="25.0" prefWidth="252.0" />
+      <Label fx:id="lblMesas" layoutX="55.0" layoutY="182.0" text="Mesas" />
+      <Button fx:id="btnGuardar" layoutX="297.0" layoutY="220.0" mnemonicParsing="false" onAction="#Guardar" prefHeight="25.0" prefWidth="88.0" text="Guardar" />
+      <ImageView fitHeight="202.0" fitWidth="270.0" layoutX="487.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../resources/f0026718.jpg" />
+         </image>
+      </ImageView>
+
+   </children>
+</AnchorPane>
