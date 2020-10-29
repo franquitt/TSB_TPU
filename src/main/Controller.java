@@ -1,6 +1,6 @@
 package main;
 
-import Soporte.Grabar;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -11,14 +11,12 @@ import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import java.io.File;
-import java.util.Map;
 import Modelos.*;
 import javafx.stage.Stage;
 import javax.swing.*;
 
 public class Controller
 {
-    public ImageView ivImagen;
     public Button btnCargar;
     public Button btnSalir;
     public Button btnLimpiar;
@@ -182,18 +180,6 @@ public class Controller
         txtResultados.setText("");
     }
 
-    public void Guardar(javafx.event.ActionEvent action)
-    {
-        try
-        {
-            Grabar gb = new Grabar(carpeta + "\\" + nombre);
-            gb.write(txtResultados.getText());
-            JOptionPane.showMessageDialog(null, "Archivo guardado Exitosamente","Exportar", JOptionPane.PLAIN_MESSAGE);
-        }catch (Exception e )
-        {
-            JOptionPane.showMessageDialog(null, "Error al intentar guardar","Exportar", JOptionPane.ERROR_MESSAGE);
-        }
-    }
 
     public void btnSalir(ActionEvent a)
     {
