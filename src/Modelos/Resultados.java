@@ -25,19 +25,17 @@ public class Resultados {
     public void sumarPorAgrupacion(String path) {
         mesas = new TSB_OAHashtable();
         TSB_OAHashtable res;
-        String linea[], categoria, codAgrupacion, codMesa, nomMesa;
+        String linea[], categoria, codAgrupacion;
         int votos;
         Scanner scanner;
         try {
             scanner = new Scanner(new File(path + "\\mesas_totales_agrp_politica.dsv"));
-            int index = 0;
             Region circuito = null;
             while (scanner.hasNextLine()) {
                 linea = scanner.nextLine().split("\\|");
                 categoria = linea[4];
                 if (categoria.compareTo("000100000000000") == 0) {
 
-                    codMesa = linea[3];
                     codAgrupacion = linea[5];
                     if (circuito == null || !circuito.getNombre().equals(linea[2])) {
                         Iterator<Region> iterador = (pais.getDistritos()).iterator();
